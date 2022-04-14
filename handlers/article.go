@@ -41,7 +41,6 @@ func (s *server) articleDetails(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	json.NewEncoder(w).Encode(res)
-
 }
 
 func (s *server) createNewArticle(w http.ResponseWriter, r *http.Request) {
@@ -62,4 +61,21 @@ func (s *server) createNewArticle(w http.ResponseWriter, r *http.Request) {
 	}
 
 	json.NewEncoder(w).Encode(res)
+}
+
+func (s *server) deleteArticle(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	key := vars["id"]
+
+	id, err := strconv.Atoi(key)
+	if err != nil {
+		log.Printf("bad request error: %v", err)
+		return
+	}
+
+	err = s.articleService.Delete(id)
+	if err != nil {
+		log.Printf("internal error: %v", err)
+		return
+	}
 }

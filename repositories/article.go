@@ -84,6 +84,15 @@ func (r *articleRepository) Create(title string, desc string, content string) (*
 }
 
 func (r *articleRepository) Delete(id int) error {
+	stmt, err := r.db.Prepare("delete from articles where id = ?")
+	if err != nil {
+		return err
+	}
+	_, err = stmt.Exec(id)
+	if err != nil {
+		return err
+	}
+
 	return nil
 }
 

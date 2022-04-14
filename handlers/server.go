@@ -41,6 +41,7 @@ func (s *server) GetRouter() *mux.Router {
 	myRouter.HandleFunc("/", homePage).Methods("GET")
 
 	myRouter.HandleFunc("/articles/{id}", s.articleDetails).Methods("GET")
+	myRouter.HandleFunc("/articles/{id}", s.deleteArticle).Methods("DELETE")
 	myRouter.HandleFunc("/articles", s.createNewArticle).Methods("POST")
 	myRouter.HandleFunc("/articles", s.articleList).Methods("GET")
 

@@ -9,6 +9,7 @@ type Service interface {
 	Create(a *models.Article) (*models.Article, error)
 	Read(id int) (*models.Article, error)
 	List() ([]*models.Article, error)
+	Delete(id int) error
 }
 
 type service struct {
@@ -35,4 +36,10 @@ func (s *service) List() ([]*models.Article, error) {
 	articles, err := s.repo.List()
 
 	return articles, err
+}
+
+func (s *service) Delete(id int) error {
+	err := s.repo.Delete(id)
+
+	return err
 }
