@@ -7,11 +7,13 @@ import (
 	"github.com/anastasiia-shurkina-axon/go-first/middlewares"
 	"github.com/anastasiia-shurkina-axon/go-first/repositories"
 	_ "github.com/go-sql-driver/mysql"
-	"github.com/gorilla/mux"
+
+	"github.com/go-chi/chi/v5"
+	"github.com/go-chi/chi/v5/middleware"
 )
 
 type Server interface {
-	GetRouter() *mux.Router
+	GetRouter() *chi.Mux
 }
 
 type server struct {
@@ -35,19 +37,17 @@ func NewServer() Server {
 	}
 }
 
-func (s *server) GetRouter() *mux.Router {
-	myRouter := mux.NewRouter().StrictSlash(true)
+func (s *server) GetRouter() *chi.Mux {
+	r := chi.NewRouter()
+	r.Use(middleware.Logger)
+	r.Use(middlewares.ResponseAsJson)
+	r.Use(middleware.AllowContentType("application/json"))
 
-	myRouter.HandleFunc("/", homePage).Methods("GET")
+	r.Get("/", homePage)
+	r.Get("/articles/{id}", s.articleDetails)
+	r.Get("/articles", s.articleList)
+	r.Post("/articles", s.createNewArticle)
+	r.Delete("/articles/{id}", s.deleteArticle)
 
-	myRouter.HandleFunc("/articles/{id}", s.articleDetails).Methods("GET")
-	myRouter.HandleFunc("/articles/{id}", s.deleteArticle).Methods("DELETE")
-	myRouter.HandleFunc("/articles", s.createNewArticle).Methods("POST")
-	myRouter.HandleFunc("/articles", s.articleList).Methods("GET")
-
-	myRouter.Use(
-		middlewares.LogRequest,
-		middlewares.ResponseAsJson,
-	)
-	return myRouter
+	return r
 }

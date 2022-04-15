@@ -9,7 +9,7 @@ import (
 	"strconv"
 
 	"github.com/anastasiia-shurkina-axon/go-first/models"
-	"github.com/gorilla/mux"
+	"github.com/go-chi/chi/v5"
 )
 
 func homePage(w http.ResponseWriter, r *http.Request) {
@@ -26,8 +26,7 @@ func (s *server) articleList(w http.ResponseWriter, r *http.Request) {
 }
 
 func (s *server) articleDetails(w http.ResponseWriter, r *http.Request) {
-	vars := mux.Vars(r)
-	key := vars["id"]
+	key := chi.URLParam(r, "id")
 
 	id, err := strconv.Atoi(key)
 	if err != nil {
@@ -64,8 +63,7 @@ func (s *server) createNewArticle(w http.ResponseWriter, r *http.Request) {
 }
 
 func (s *server) deleteArticle(w http.ResponseWriter, r *http.Request) {
-	vars := mux.Vars(r)
-	key := vars["id"]
+	key := chi.URLParam(r, "id")
 
 	id, err := strconv.Atoi(key)
 	if err != nil {
