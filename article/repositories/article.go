@@ -3,7 +3,7 @@ package repositories
 import (
 	"database/sql"
 
-	"github.com/anastasiia-shurkina-axon/go-first/models"
+	"github.com/anastasiia-shurkina-axon/go-first/article/models"
 )
 
 type ArticleRepository interface {

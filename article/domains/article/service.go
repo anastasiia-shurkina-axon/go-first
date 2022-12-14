@@ -1,8 +1,8 @@
 package article
 
 import (
-	"github.com/anastasiia-shurkina-axon/go-first/models"
-	"github.com/anastasiia-shurkina-axon/go-first/repositories"
+	"github.com/anastasiia-shurkina-axon/go-first/article/models"
+	"github.com/anastasiia-shurkina-axon/go-first/article/repositories"
 )
 
 type Service interface {

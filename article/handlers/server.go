@@ -3,9 +3,9 @@ package handlers
 import (
 	"database/sql"
 
-	"github.com/anastasiia-shurkina-axon/go-first/domains/article"
-	"github.com/anastasiia-shurkina-axon/go-first/middlewares"
-	"github.com/anastasiia-shurkina-axon/go-first/repositories"
+	"github.com/anastasiia-shurkina-axon/go-first/article/domains/article"
+	"github.com/anastasiia-shurkina-axon/go-first/article/middlewares"
+	"github.com/anastasiia-shurkina-axon/go-first/article/repositories"
 	_ "github.com/go-sql-driver/mysql"
 
 	"github.com/go-chi/chi/v5"

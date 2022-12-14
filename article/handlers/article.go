@@ -8,7 +8,7 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/anastasiia-shurkina-axon/go-first/models"
+	"github.com/anastasiia-shurkina-axon/go-first/article/models"
 	"github.com/go-chi/chi/v5"
 )
 
